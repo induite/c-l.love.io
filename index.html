@@ -9,8 +9,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-
     <style>
+         @media (max-width: 480px) {
+         /* 适应小屏幕 */
+         .body--mobile .text {
+         font-size: 90%; /* 缩小10% */
+         }
+        }
+
         html {
             height: 100%;
         }
@@ -148,16 +154,19 @@ var S = {
         //想说的话
         S.UI.simulate("曹美婷 | 小宝贝 |I'm|廖家致|Nice|to|Meet|You| I love you |#countdown 3|未完待续 |敬请期待！|#time");
 
-        // 根据手机尺寸调整大小
-        var screenWidth = window.innerWidth;
-        var screenHeight = window.innerHeight;
-        var scaleFactor = Math.min(screenWidth / 480, screenHeight / 800); // 根据实际情况修改比例
+        // 根据手机设备调整字体大小
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile) {
+            document.body.classList.add('body--mobile');
+        }
 
         S.Drawing.loop(function () {
-            S.Shape.render(scaleFactor);
+            S.Shape.render();
         });
     }
 };
+
+
 
 
     S.Drawing = (function () {
